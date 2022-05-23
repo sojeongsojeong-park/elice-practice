@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  div.container
+    table.table.table-striped
+      thead
+        tr
+          th(scope="col")= ""
+          th(scope="col")= "제목"
+          th(scope="col")= "작성자"
+          th(scope="col")= "작성일"
+          th(scope="col")= "조회수"
+
+      tbody
+        each post in posts
+          tr
+            td= post["post_id"]
+            td
+              a(href=`/posts/${post.post_id}`)= post["title"]
+            td= post["writer"]
+            td= (new Date(post["createdAt"])).toISOString().split("T")[0]
+            td= post["hit"]
+
+        else
+          tr
+            td(colspan="5")= "등록된 게시글이 없습니다."
+
+    button.btn.btn-primary.float-end(type="button" onclick="location.href = '/posts/write'")= "글쓰기"
+
+    nav(aria-label="Page navigation")
+      ul.pagination.justify-content-center
+        li(class={"page-item": true, "disabled": page == 1})
+          a.page-link(href=`/posts?page=${page-1}`)= "Previous"
+
+        - let n = 1;
+        while n <= totalPages
+          li(class={"page-item": true, "active": page == n})
+            a.page-link(href=`/posts?page=${n}`)= n++
+
+        li(class={"page-item": true, "disabled": page == totalPages})
+          a.page-link(href=`/posts?page=${page+1}`)= "Next"
+
