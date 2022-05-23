@@ -1,0 +1,19 @@
+{
+  "name": "elicepractice",
+  "version": "1.0.0",
+  "description": "elice 부트캠프를 수강하고 있습니다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sojeongsojeong-park/elice-practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sojeongsojeong-park/elice-practice/issues"
+  },
+  "homepage": "https://github.com/sojeongsojeong-park/elice-practice#readme"
+}
