@@ -2,14 +2,15 @@ extends ../layout
 
 block content
   div.container.mt-5
-    label(for="title" class="form-label") 제목 
-    input(type="text" class="form-control" id="title" placeholder="제목을 입력해 주세요.") 
+    form
+      label(for="title" class="form-label") 제목 
+      input(type="text" class="form-control" id="title" placeholder="제목을 입력해 주세요.") 
 
-    label(for="writer" class="form-label") 작성자 
-    input(type="text" class="form-control" id="writer" placeholder="작성자를 입력해 주세요")
+      label(for="writer" class="form-label") 작성자 
+      input(type="text" class="form-control" id="writer" placeholder="작성자를 입력해 주세요")
 
-    label(for="content" class="form-label") 본문 
-    textarea(type="text" class="form-control" id="content" placeholder="본문을 입력해주세요." rows=6) 
+      label(for="content" class="form-label") 본문 
+      textarea(type="text" class="form-control" id="content" placeholder="본문을 입력해주세요." rows=6) 
 
     button.mt-3.float-end(type="button" class="btn btn-primary" onclick="writePost()") 등록
 
@@ -28,8 +29,12 @@ block content
             "Content-type": "application/json; charset = UTF-8",
           },
           body: JSON.stringify(data)
-        })
+        });
 
-        await res.json()
-        alert("완료");
+        const result = await res.json();
+        if(result.message == "OK"){
+          location.href = "/posts";
+        } else {
+          alert(result.message);
+        }
       }

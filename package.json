@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sojeongsojeong-park/elice-practice/issues"
   },
-  "homepage": "https://github.com/sojeongsojeong-park/elice-practice#readme"
+  "homepage": "https://github.com/sojeongsojeong-park/elice-practice#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
