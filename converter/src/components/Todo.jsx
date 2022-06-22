@@ -1,4 +1,30 @@
 import React from "react";
+import TodoList from "./TodoList";
+import styled, { css } from "styled-components";
+
+const borderRadiusWidth = css`
+  border-radius: 5px;
+`;
+const Container = styled.div`
+  padding: 24px;
+`;
+const AddInput = styled.input`
+  width: 200px;
+  height: 20px;
+  border: 1px solid #b2b2b2;
+  ${borderRadiusWidth};
+  padding: 4px;
+`;
+const AddBtn = styled.button`
+  margin-left: 12px;
+  background-color: rgb(67, 175, 67);
+  color: #fff;
+  width: 80px;
+  height: 30px;
+  border: none;
+  ${borderRadiusWidth}
+  padding: 4px 12px;
+`;
 
 const Todo = () => {
   const [todoList, setTodoList] = React.useState([]);
@@ -12,33 +38,16 @@ const Todo = () => {
   const handleAddClick = () => {
     const id = todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1;
     const newTodo = {
-      id,
+      id:id,
       isFinish: false,
       content: text,
     };
     //todoList 배열입니다.
     //setTodoList도 배열을 파라미터로 받음
     setTodoList([...todoList, newTodo]);
+    setText("");
   };
 
-  const handleDelete = (id) => {
-    setTodoList(
-      todoList.filter((todo) => {
-        return todo.id !== id;
-      })
-    );
-  };
-
-  const handleCheckChange = (event, id) => {
-    setTodoList(
-      todoList.map((todo) => {
-        if (todo.id === id) {
-          todo.isFinish = event.target.checked;
-        }
-        return todo;
-      })
-    );
-  };
   React.useEffect(() => {
     let isAllFinish = true;
     todoList.forEach((todo) => {
@@ -57,33 +66,14 @@ const Todo = () => {
   }, [todoList]);
 
   return (
-    <div>
+    <Container>
       <div>
-        <input value={text} onChange={handleChange} />
-        <button onClick={handleAddClick}>추가</button>
+        <AddInput value={text} onChange={handleChange} />
+        <AddBtn onClick={handleAddClick}>추가</AddBtn>
       </div>
-      <ul>
-        {todoList.map((todo) => (
-          <li>
-            <input
-              type='checkbox'
-              onChange={(event) => {
-                handleCheckChange(event, todo.id);
-              }}
-            />
-            <span>{todo.content}</span>
-            <button
-              onClick={() => {
-                handleDelete(todo.id);
-              }}
-            >
-              ❌
-            </button>
-          </li>
-        ))}
-      </ul>
+      <TodoList todoList={todoList} />
       <div>{message}</div>
-    </div>
+    </Container>
   );
 };
 

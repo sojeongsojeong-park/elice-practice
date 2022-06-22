@@ -1,0 +1,27 @@
+.container{
+  .check {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+  }
+  .todo {
+    padding: 0 15px;
+    vertical-align: middle;
+  
+    &.checked{
+      color:#b2b2b2;
+    }
+  }
+  .delete_btn{
+    //공간도 차지하지 않음
+    //display: none;
+    //공간은 차지하지만 보이지 않음
+    visibility:hidden;
+  }
+
+  &:hover{
+    visibility: visible;
+  }
+}
+
+
