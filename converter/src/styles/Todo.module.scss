@@ -1,24 +1,32 @@
 .container {
+  width: 300px;
   padding: 24px;
 
-  $borderRadiusWidth: 5px;
+  .input_area {
+    $inputAlign: middle;
 
-  .add_input {
-    width: 200px;
-    height: 20px;
-    border: 1px solid #b2b2b2;
-    border-radius: $borderRadiusWidth;
-    padding: 4px;
+    display: flex;
+
+    input {
+      flex-grow: 1;
+      padding: 4px;
+      margin-right: 8px;
+      border-radius: 4px;
+      border: 1px solid #b2b2b2;
+      vertical-align: $inputAlign;
+    }
+
+    button {
+      padding: 4px 12px;
+      color: white;
+      background-color: #1b9f45;
+      border-radius: 4px;
+      border: none;
+      vertical-align: $inputAlign;
+    }
   }
 
-  .add_btn {
-    margin-left: 12px;
-    background-color: rgb(67, 175, 67);
-    color: #fff;
-    width: 80px;
-    height: 30px;
-    border: none;
-    border-radius: $borderRadiusWidth;
-    padding: 4px 12px;
+  .message {
+    font-size: 1.1rem;
   }
 }

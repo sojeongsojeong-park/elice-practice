@@ -1,54 +1,64 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import TodoList from "./TodoList";
-import styled, { css } from "styled-components";
 
-const borderRadiusWidth = css`
-  border-radius: 5px;
-`;
 const Container = styled.div`
+  width: 300px;
   padding: 24px;
 `;
-const AddInput = styled.input`
-  width: 200px;
-  height: 20px;
-  border: 1px solid #b2b2b2;
-  ${borderRadiusWidth};
-  padding: 4px;
+
+const InputArea = styled.div`
+  $inputAlign: middle;
+
+  display: flex;
+
+  input {
+    flex-grow: 1;
+    padding: 4px;
+    margin-right: 8px;
+    border-radius: 4px;
+    border: 1px solid #b2b2b2;
+    vertical-align: $inputAlign;
+  }
+
+  button {
+    padding: 4px 12px;
+    color: white;
+    background-color: #1b9f45;
+    border-radius: 4px;
+    border: none;
+    vertical-align: $inputAlign;
+  }
 `;
-const AddBtn = styled.button`
-  margin-left: 12px;
-  background-color: rgb(67, 175, 67);
-  color: #fff;
-  width: 80px;
-  height: 30px;
-  border: none;
-  ${borderRadiusWidth}
-  padding: 4px 12px;
+
+const Message = styled.div`
+  font-size: 1.1rem;
 `;
 
 const Todo = () => {
-  const [todoList, setTodoList] = React.useState([]);
-  const [text, setText] = React.useState("");
-  const [message, setMessage] = React.useState("");
+  const [todoList, setTodoList] = useState([]);
+  const [text, setText] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleChange = (event) => {
+  const handleTextChange = (event) => {
     setText(event.target.value);
   };
 
   const handleAddClick = () => {
-    const id = todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1;
-    const newTodo = {
-      id:id,
-      isFinish: false,
-      content: text,
-    };
-    //todoList 배열입니다.
-    //setTodoList도 배열을 파라미터로 받음
-    setTodoList([...todoList, newTodo]);
-    setText("");
+    if (text) {
+      const id =
+        todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1;
+      const newTodo = {
+        id: id,
+        isFinish: false,
+        content: text,
+      };
+      setTodoList([...todoList, newTodo]);
+      setText("");
+    }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     let isAllFinish = true;
     todoList.forEach((todo) => {
       if (!todo.isFinish) {
@@ -67,12 +77,15 @@ const Todo = () => {
 
   return (
     <Container>
+      <InputArea>
+        <input value={text} onChange={handleTextChange} />
+        <button onClick={handleAddClick}>추가</button>
+      </InputArea>
       <div>
-        <AddInput value={text} onChange={handleChange} />
-        <AddBtn onClick={handleAddClick}>추가</AddBtn>
+        <TodoList todoList={todoList} setTodoList={setTodoList} />
       </div>
-      <TodoList todoList={todoList} />
-      <div>{message}</div>
+      <hr />
+      <Message>{message}</Message>
     </Container>
   );
 };
