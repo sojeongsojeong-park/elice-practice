@@ -4,12 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+//import { createStore } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers";
+//import rootReducer from "./reducers";
+import counterReducer from "./reducers/counterReducer";
 
-
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
